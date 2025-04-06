@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Mobile Frame Site</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none; /* Standard */
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      touch-action: manipulation;
+      overflow: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      align-items: center;
+      background: linear-gradient(90deg, #1e1e1e, #2a2a2a);
+      padding: 12px 0;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #333;
+    }
+
+    .navbar button {
+      background-color: #ff9800;
+      color: #121212;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255,152,0,0.4);
+    }
+
+    .navbar button:hover {
+      background-color: #ffa726;
+      transform: scale(1.08);
+      box-shadow: 0 6px 14px rgba(255,167,38,0.6);
+    }
+
+    .iframe-container {
+      width: 100vw;
+      height: calc(100vh - 70px);
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 2px solid #333;
+      border-radius: 16px;
+      background-color: #1a1a1a;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Disable double-tap zoom */
+    html {
+      touch-action: manipulation;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <button onclick="loadPage('home.html')">Home</button>
+    <button onclick="loadPage('about.html')">About</button>
+    <button onclick="loadPage('contact.html')">Contact</button>
+  </div>
+
+  <div class="iframe-container">
+    <iframe id="main-frame" src="home.html" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+  </div>
+
+  <script>
+    function loadPage(page) {
+      document.getElementById('main-frame').src = page;
+    }
+    
+    // Prevent zooming gestures
+    document.addEventListener('gesturestart', function(e) {
+      e.preventDefault();
+    });
+    
+    // Prevent text selection
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+    });
+    
+    // Ensure iframe fits screen on resize
+    window.addEventListener('resize', function() {
+      const iframe = document.getElementById('main-frame');
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+    });
+    
+    // Disable pinch zoom in iframe
+    document.getElementById('main-frame').addEventListener('load', function() {
+      const iframeDoc = this.contentDocument || this.contentWindow.document;
+      iframeDoc.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
+      iframeDoc.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
