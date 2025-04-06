@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>සිංහල අවුරුදු චාරිත්‍ර - 2025</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Sinhala', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffc107;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      border-left: 4px solid #ffc107;
+    }
+
+    .card h2 {
+      color: #ffeb3b;
+      margin-bottom: 10px;
+    }
+
+    .countdown {
+      margin-top: 10px;
+      color: #9f7aea;
+      font-weight: bold;
+    }
+
+    .expired {
+      color: #ff6b6b;
+    }
+    
+    .active-event {
+      color: #4caf50;
+      font-weight: bold;
+      animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #aaaaaa;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>සිංහල අවුරුදු චාරිත්‍ර 2025</h1>
+
+<div class="card">
+  <h2>අලුත් අවුරුදු උදාව</h2>
+  <p>අප්‍රේල් 14 වැනි සඳුදා දින පූර්වභාග 03.21 ට සිංහල අලුත් අවුරුද්ද උදා වෙයි.</p>
+  <div id="countdown1" class="countdown">Calculating...</div>
+</div>
+
+<div class="card">
+  <h2>පුන්‍ය කාලය ආරම්භය</h2>
+  <p>අප්‍රේල් 13 වැනි ඉරිදා අපරභාග 08.57 සිට පුන්‍ය කාලය ආරම්භ වේ.</p>
+  <div id="countdown2" class="countdown">Calculating...</div>
+</div>
+
+<div class="card">
+  <h2>ආහාර පිසීම</h2>
+  <p>අප්‍රේල් 14 වැනි සඳුදා පූර්වභාග 04.04 ට ආහාර පිසීම.</p>
+  <div id="countdown3" class="countdown">Calculating...</div>
+</div>
+
+<div class="card">
+  <h2>වැඩ ඇල්ලීම</h2>
+  <p>අප්‍රේල් 14 වැනි සඳුදා පූර්වභාග 06.44 ට වැඩ ඇල්ලීම.</p>
+  <div id="countdown4" class="countdown">Calculating...</div>
+</div>
+
+<div class="card">
+  <h2>හිසතෙල් ගෑම</h2>
+  <p>අප්‍රේල් 16 වැනි බදාදා පූර්වභාග 09.04 ට හිසතෙල් ගෑම.</p>
+  <div id="countdown5" class="countdown">Calculating...</div>
+</div>
+
+<div class="card">
+  <h2>රැකීරක්ෂා පිටත් වීම</h2>
+  <p>අප්‍රේල් 17 වැනි බ්‍රහස්පතින්දා පූර්වභාග 09.03 ට පිටත්ව යෑම.</p>
+  <div id="countdown6" class="countdown">Calculating...</div>
+</div>
+
+<div class="footer">
+  <p>2025 සිංහල අලුත් අවුරුද්ද - නිවැරදි කාලසටහන අනුව යාවත්කාලීනවේ.</p>
+</div>
+
+<script>
+  // 2025 සිංහල අලුත් අවුරුද්ද සඳහා නිවැරදි කාලයන් (IST - UTC+5:30)
+  const events = [
+    { 
+      id: 'countdown1', 
+      date: '2025-04-14T03:21:00+05:30',
+      activeMessage: 'අලුත් අවුරුද්ද උදාවී ඇත! සුභ අලුත් අවුරුද්දක් වේවා!'
+    },
+    { 
+      id: 'countdown2', 
+      date: '2025-04-13T20:57:00+05:30',
+      activeMessage: 'පුන්‍ය කාලය ආරම්භ වී ඇත!'
+    },
+    { 
+      id: 'countdown3', 
+      date: '2025-04-14T04:04:00+05:30',
+      activeMessage: 'ආහාර පිසීමේ කාලය ආරම්භ විය!'
+    },
+    { 
+      id: 'countdown4', 
+      date: '2025-04-14T06:44:00+05:30',
+      activeMessage: 'වැඩ ඇල්ලීමේ කාලය ආරම්භ විය!'
+    },
+    { 
+      id: 'countdown5', 
+      date: '2025-04-16T09:04:00+05:30',
+      activeMessage: 'හිසතෙල් ගෑමේ කාලය ආරම්භ විය!'
+    },
+    { 
+      id: 'countdown6', 
+      date: '2025-04-17T09:03:00+05:30',
+      activeMessage: 'රැකීරක්ෂා පිටත්ව යාමේ කාලය ආරම්භ විය!'
+    }
+  ];
+
+  function updateCountdowns() {
+    const now = new Date();
+    
+    events.forEach(event => {
+      const target = new Date(event.date);
+      const diff = target - now;
+      const element = document.getElementById(event.id);
+
+      if (diff <= 0 && diff > -86400000) { // කාලය අවසන් වී පැය 24ක් ඇතුළත
+        element.innerHTML = `<span class="active-event">${event.activeMessage}</span>`;
+      } else if (diff <= -86400000) { // කාලය අවසන් වී පැය 24කට වැඩි කාලයක් ගතවී ඇත
+        element.innerHTML = "<span class='expired'>කාලය අවසන්!</span>";
+      } else {
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        element.innerHTML = `
+  <table style="
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e2f;
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: sans-serif;
+  ">
+    <thead style="background-color: #292947;">
+      <tr>
+        <th style="padding: 12px;">දිනය</th>
+        <th style="padding: 12px;">පැය</th>
+        <th style="padding: 12px;">මිනිත්තු</th>
+        <th style="padding: 12px;">තත්පර</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 10px;">${days}</td>
+        <td style="padding: 10px;">${Math.floor(hours)} </td>
+        <td style="padding: 10px;">${Math.floor(minutes)}</td>
+        <td style="padding: 10px;">${seconds}</td>
+      </tr>
+    </tbody>
+  </table>
+`;
+      }
+    });
+  }
+
+  setInterval(updateCountdowns, 1000);
+  updateCountdowns();
+</script>
+
+</body>
+</html>
